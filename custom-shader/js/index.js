@@ -12,12 +12,33 @@
  */
 
 /* wle:auto-imports:start */
+import {Cursor} from '@wonderlandengine/components';
+import {FingerCursor} from '@wonderlandengine/components';
+import {HandTracking} from '@wonderlandengine/components';
+import {HowlerAudioListener} from '@wonderlandengine/components';
+import {MouseLookComponent} from '@wonderlandengine/components';
+import {PlayerHeight} from '@wonderlandengine/components';
+import {VrModeActiveSwitch} from '@wonderlandengine/components';
+import {WasdControlsComponent} from '@wonderlandengine/components';
+import {DustParticles} from './particles.js';
 /* wle:auto-imports:end */
 
 import {loadRuntime} from '@wonderlandengine/api';
 import * as API from '@wonderlandengine/api'; // Deprecated: Backward compatibility.
 
 /* wle:auto-constants:start */
+const RuntimeOptions = {
+    physx: false,
+    loader: false,
+    xrFramebufferScaleFactor: 1,
+    canvas: 'canvas',
+};
+const Constants = {
+    ProjectName: 'CustomShader.wlp',
+    RuntimeBaseName: 'WonderlandRuntime',
+    WebXRRequiredFeatures: ['local'],
+    WebXROptionalFeatures: ['local', 'local-floor', 'hand-tracking', 'hit-test'],
+};
 /* wle:auto-constants:end */
 
 const engine = await loadRuntime(Constants.RuntimeBaseName, RuntimeOptions);
@@ -62,9 +83,19 @@ if (document.readyState === 'loading') {
 }
 
 /* wle:auto-register:start */
+engine.registerComponent(Cursor);
+engine.registerComponent(FingerCursor);
+engine.registerComponent(HandTracking);
+engine.registerComponent(HowlerAudioListener);
+engine.registerComponent(MouseLookComponent);
+engine.registerComponent(PlayerHeight);
+engine.registerComponent(VrModeActiveSwitch);
+engine.registerComponent(WasdControlsComponent);
+engine.registerComponent(DustParticles);
 /* wle:auto-register:end */
 
 engine.scene.load(`${Constants.ProjectName}.bin`);
 
 /* wle:auto-benchmark:start */
+
 /* wle:auto-benchmark:end */
